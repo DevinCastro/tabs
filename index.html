@@ -8,7 +8,7 @@
 <body>
   
 
-  <h1>hello</h1>
+  <h1>Search Tabs</h1>
 
   <form>
     <label for="search"></label>
@@ -26,7 +26,7 @@
       event.preventDefault()
       console.log(document.getElementById('search').value)
 
-      axios.get(`http://www.songsterr.com/a/ra/songs.json?pattern=${document.getElementById('search').value}`)
+      axios.get(`https://www.songsterr.com/a/ra/songs.json?pattern=${document.getElementById('search').value}`)
         .then(({ data }) => {
           console.log(data.slice(0,5))
 
@@ -40,7 +40,7 @@
             <br>
             Song: ${song.title}
             <br>
-            <a href="http://www.songsterr.com/a/wa/song?id=${song.id}">Tab</a>
+            <a href="https://www.songsterr.com/a/wa/song?id=${song.id}">Tab</a>
             `
 
             document.getElementById('results').append(songElem)
