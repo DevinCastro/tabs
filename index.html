@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+  <h1>hello</h1>
+
+  <form>
+    <label for="search"></label>
+    <input type="text" name="search" id="search">
+    <button id="searchTab">Search</button>
+  </form>
+
+  <ul id="results"></ul>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+
+    document.getElementById('searchTab').addEventListener('click', event => {
+      event.preventDefault()
+      console.log(document.getElementById('search').value)
+
+      axios.get(`http://www.songsterr.com/a/ra/songs.json?pattern=${document.getElementById('search').value}`)
+        .then(({ data }) => {
+          console.log(data.slice(0,5))
+
+         
+
+          data.slice(0, 5).forEach(song => {
+
+            let songElem = document.createElement('li')
+            songElem.innerHTML = `
+            Artist: ${song.artist.name}
+            <br>
+            Song: ${song.title}
+            <br>
+            <a href="http://www.songsterr.com/a/wa/song?id=${song.id}">Tab</a>
+            `
+
+            document.getElementById('results').append(songElem)
+          })
+          
+        })
+        .catch(err => console.log(err))
+
+
+    })
+
+
+  </script>
+
+</body>
+</html>
